@@ -5,6 +5,7 @@ vim.pack.add {
     'https://github.com/wakatime/vim-wakatime',
     'https://github.com/brenoprata10/nvim-highlight-colors',
     'https://github.com/ibhagwan/fzf-lua',
+    'https://github.com/L3MON4D3/LuaSnip',
 }
 
 vim.cmd.packadd('cfilter')
@@ -16,8 +17,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.colorcolumn = '80'
-vim.opt.textwidth = 80
+vim.opt.colorcolumn = '100'
+vim.opt.textwidth = 100
 vim.opt.completeopt = 'menu,menuone,fuzzy,noinsert'
 vim.opt.swapfile = false
 vim.opt.confirm = true
@@ -70,6 +71,7 @@ vim.keymap.set('n', '<C-m>', function() vim.cmd('silent! 5argument') end)
 vim.keymap.set('n', '<leader>f', ':FzfLua files<CR>', { silent = true })
 vim.keymap.set('n', '<leader>s', ':FzfLua grep<CR>', { silent = true })
 vim.keymap.set('n', '<leader>h', ':FzfLua helptags<CR>', { silent = true })
+vim.keymap.set({'n','v'}, '<leader>y', '"+y', { silent = true })
 
 -- Autocommands
 
@@ -92,3 +94,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('TextYankPost', {
     callback = function() vim.highlight.on_yank() end,
 })
+
+-- Snippets
+
+local ls = require("luasnip")
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+
+vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() ls.jump(-1) end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})
+
+-- Neovide Configuration
+
+if vim.g.neovide then
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.keymap.set('n', '<D-=>', function() vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1 end, { desc = "Zoom in" })
+  vim.keymap.set('n', '<D-->', function() vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1 end, { desc = "Zoom out" })
+  vim.keymap.set({'n', 'v'}, '<D-v>', '"+p', { desc = "Paste from clipboard" })
+  vim.keymap.set('i', '<D-v>', '<C-r>+', { desc = "Paste from clipboard" })vim.keymap.set('n', '<D-0>', function() vim.g.neovide_scale_factor = 1.0 end, { desc = "Reset zoom" }) end
+  
