@@ -5,7 +5,8 @@ background = 000000
 background-opacity = 0.85
 background-blur = false
 confirm-close-surface=false
-font-family = monaco
+# font-family = monaco
+ font-family = Iosevka
 
 shell-integration-features = no-cursor,no-sudo,no-title
 cursor-color = cell-foreground
