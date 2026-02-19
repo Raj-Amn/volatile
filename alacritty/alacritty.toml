@@ -2,3 +2,6 @@
 import = [
     "~/.config/alacritty/themes/themes/{theme}.toml"
 ]
+[font]
+normal = { family = "Monaco Nerd Font Mono", style = "Regular" }
+size = 13.0

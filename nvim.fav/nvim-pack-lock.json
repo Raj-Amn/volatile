@@ -4,10 +4,6 @@
       "rev": "dae4f5aaa3574bd0c2b9dd20fb9542a02c10471c",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
-    "blink.cmp": {
-      "rev": "cd79f572971c58784ca72551af29af3a63da9168",
-      "src": "https://github.com/saghen/blink.cmp"
-    },
     "fzf-lua": {
       "rev": "1749fedca3a0efdd47918f8b588f7c7abb4e5bd6",
       "src": "https://github.com/ibhagwan/fzf-lua"
